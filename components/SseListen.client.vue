@@ -10,4 +10,11 @@
     eventSource.onmessage = (event) => {
         document.getElementById('result')!.innerHTML += event.data + '<br>'
     }
+
+    // This does not work with Nuxt/Nitro proxy :(
+    // onerror never gets called (!)
+    eventSource.onerror = (event) => {
+        console.error('EventSource failed:', event)
+        // We should attempt to reconnect here
+    }
 </script>
